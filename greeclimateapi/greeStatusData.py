@@ -1,4 +1,4 @@
-from enums import *
+from greeclimateapi.enums import *
 
 
 class GreeStatusData:

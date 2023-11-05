@@ -6,7 +6,7 @@ from greeclimateapi.enums import *
 class statusGreeCommand(greeCommand):
     def __init__(self, connection, cipher, factory):
         super().__init__(connection, cipher, factory)
-        self.statusData: GreeStatusData
+        self.statusData = GreeStatusData()
 
     def send_command(self):
         pack_request = {

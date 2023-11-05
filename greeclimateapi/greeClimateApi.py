@@ -1,12 +1,12 @@
-from commands.factory import greeCommandFactory
-from commands.statusGreeCommand import statusGreeCommand
-from greeStatusData import GreeStatusData
-from enums import *
+from greeclimateapi.commands.factory import greeCommandFactory
+from greeclimateapi.commands.statusGreeCommand import statusGreeCommand
+from greeclimateapi.greeStatusData import GreeStatusData
+from greeclimateapi.enums import *
 
 
 class GreeClimateApi:
     def __init__(self, device_ip):
-        self.statusData: GreeStatusData
+        self.statusData = GreeStatusData()
         self.statusCommand: statusGreeCommand
         self.mac = None
         self.commandFactory = greeCommandFactory(device_ip)
@@ -17,9 +17,13 @@ class GreeClimateApi:
         self.statusCommand = self.commandFactory.create_status_command()
         self.status()
 
-    def status(self):
+    def sync_status(self) -> GreeStatusData:
         self.statusCommand.send_command()
         self.statusData = self.statusCommand.statusData
+        return self.statusData
+
+    def status(self) -> GreeStatusData:
+        return self.statusData
 
     def power(self, power_state: bool):
         self.commandFactory.create_power_set_command(power_state).send_command()
