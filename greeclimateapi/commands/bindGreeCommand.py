@@ -1,4 +1,4 @@
-from commands.greeCommand import greeCommand
+from greeclimateapi.commands.greeCommand import greeCommand
 
 
 class bindGreeCommand(greeCommand):

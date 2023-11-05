@@ -4,7 +4,7 @@ from greeStatusData import GreeStatusData
 from enums import *
 
 
-class GreeDevice:
+class GreeClimateApi:
     def __init__(self, device_ip):
         self.statusData: GreeStatusData
         self.statusCommand: statusGreeCommand

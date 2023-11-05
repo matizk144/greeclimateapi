@@ -1,6 +1,6 @@
-from commands.greeCommand import *
-from greeStatusData import *
-from enums import *
+from greeclimateapi.commands.greeCommand import *
+from greeclimateapi.greeStatusData import *
+from greeclimateapi.enums import *
 
 
 class statusGreeCommand(greeCommand):

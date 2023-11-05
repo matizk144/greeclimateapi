@@ -1,4 +1,4 @@
-from commands.greeCommand import greeSetCommand
+from greeclimateapi.commands.greeCommand import greeSetCommand
 
 
 class powerGreeSetCommand(greeSetCommand):

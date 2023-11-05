@@ -1,8 +1,8 @@
-from commands.primitivies import greeDeviceCipher, greeDeviceConnection
-from commands.scanGreeCommand import scanGreeCommand
-from commands.bindGreeCommand import bindGreeCommand
-from commands.statusGreeCommand import statusGreeCommand
-from commands.greeSetCommands import *
+from greeclimateapi.commands.primitivies import greeDeviceCipher, greeDeviceConnection
+from greeclimateapi.commands.scanGreeCommand import scanGreeCommand
+from greeclimateapi.commands.bindGreeCommand import bindGreeCommand
+from greeclimateapi.commands.statusGreeCommand import statusGreeCommand
+from greeclimateapi.commands.greeSetCommands import *
 
 
 class greeCommandFactory:
