@@ -8,7 +8,7 @@ class statusGreeCommand(greeCommand):
         super().__init__(connection, cipher, factory)
         self.statusData = GreeStatusData()
 
-    def send_command(self):
+    async def send_command(self):
         pack_request = {
             "cols": [
                 "Pow",
@@ -43,7 +43,7 @@ class statusGreeCommand(greeCommand):
             "uid": 0
         }
         request_str = str(request).replace("'", '"')
-        response = self.connection.send_data(request_str)
+        response = await self.connection.send_data(request_str)
         decrypted_pack = self.cipher.decode(response["pack"])
         self.statusData = GreeStatusData()
         self.statusData.power = bool(decrypted_pack["dat"][0])

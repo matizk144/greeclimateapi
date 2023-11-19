@@ -8,7 +8,7 @@ class greeCommand(ABC):
         self.factory = factory
 
     @abstractmethod
-    def send_command(self):
+    async def send_command(self):
         pass
 
 
@@ -18,7 +18,7 @@ class greeSetCommand(ABC):
         self.parameters = None
         self.factory = factory
 
-    def send_command(self):
+    async def send_command(self):
         pack_request = {
             "opt": self.parameters,
             "p": self.targetValues,
@@ -33,7 +33,7 @@ class greeSetCommand(ABC):
             "uid": 0
         }
         request_str = str(request).replace("'", '"')
-        response = self.factory.connection.send_data(request_str)
+        response = await self.factory.connection.send_data(request_str)
         decrypted_pack = self.factory.cipher.decode(response["pack"])
         if decrypted_pack["r"] != 200:
             raise Exception("Set command not finished correctly")
