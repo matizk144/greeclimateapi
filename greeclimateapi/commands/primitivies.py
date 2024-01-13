@@ -41,7 +41,7 @@ class greeDeviceConnection:
                 return json.loads(data)
             except:
                 tries_count = tries_count + 1
-                time.sleep(1)
+                await asyncio.sleep(1)
         raise Exception("Cannot communicate with climate")
 
     async def _send_udp_message(self, message):

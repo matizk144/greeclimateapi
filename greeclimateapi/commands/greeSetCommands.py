@@ -11,7 +11,7 @@ class powerGreeSetCommand(greeSetCommand):
 class targetTemperatureGreeSetCommand(greeSetCommand):
     def __init__(self, factory, target_temperature):
         super().__init__(factory)
-        self.parameters = ["TempUn", "SetTem"]
+        self.parameters = ["TemUn", "SetTem"]
         self.targetValues = [0, int(target_temperature)]
 
 

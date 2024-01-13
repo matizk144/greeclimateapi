@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='greeclimateapi',
-    version='0.2.0',
+    version='0.2.1',
     packages=find_packages(),
     url='https://github.com/matizk144/greeclimateapi',
     license='MIT',
