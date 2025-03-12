@@ -5,14 +5,15 @@ from greeclimateapi.enums import *
 
 
 class GreeClimateApi:
-    def __init__(self, device_ip):
+    def __init__(self, device_ip, encryption_type: EncryptionType):
         self.statusData = GreeStatusData()
         self.statusCommand: statusGreeCommand
         self.mac = None
-        self.commandFactory = greeCommandFactory(device_ip)
+        self.commandFactory = greeCommandFactory(device_ip, encryption_type)
 
     async def initialize(self):
         await self.commandFactory.create_scan_command().send_command()
+        self.commandFactory.switch_to_target_cipher()
         await self.commandFactory.create_bind_command().send_command()
         self.statusCommand = self.commandFactory.create_status_command()
 

@@ -27,13 +27,12 @@ class greeSetCommand(ABC):
         request = {
             "cid": "app",
             "i": 0,
-            "pack": self.factory.cipher.encode(str(pack_request).replace("'", '"')),
             "t": "pack",
             "tcid": self.factory.mac,
             "uid": 0
         }
-        request_str = str(request).replace("'", '"')
+        request_str = self.factory.cipher.encrypt_pack_parameter(request, pack_request)
         response = await self.factory.connection.send_data(request_str)
-        decrypted_pack = self.factory.cipher.decode(response["pack"])
+        decrypted_pack = self.factory.cipher.decode_pack_parameter(response)
         if decrypted_pack["r"] != 200:
             raise Exception("Set command not finished correctly")

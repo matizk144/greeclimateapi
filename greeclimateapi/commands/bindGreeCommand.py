@@ -10,14 +10,13 @@ class bindGreeCommand(greeCommand):
         request = {
             "cid": "app",
             "i": 1,
-            "pack": self.cipher.encode(pack_request),
             "t": "pack",
             "tcid": self.factory.mac,
             "uid": 0
         }
-        request_str = str(request).replace("'", '"')
+        request_str = self.cipher.encrypt_pack_parameter(request, pack_request)
         response = await self.connection.send_data(request_str)
-        decrypted_pack = self.cipher.decode(response["pack"])
+        decrypted_pack = self.cipher.decode_pack_parameter(response)
         if decrypted_pack["t"] != "bindok":
             raise Exception("Device cannot bind")
         self.factory.set_key(decrypted_pack["key"])
