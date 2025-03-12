@@ -46,3 +46,7 @@ class VerticalSwing(Enum):
 class TemperatureUnit(Enum):
     celsius = 0
     fahrenheit = 1
+
+class EncryptionType(Enum):
+    aes_ecb = 0
+    aes_gcm = 1

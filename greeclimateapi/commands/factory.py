@@ -1,18 +1,26 @@
-from greeclimateapi.commands.primitivies import greeDeviceCipher, greeDeviceConnection
+from greeclimateapi.commands.primitivies import greeDeviceConnection
+from greeclimateapi.commands.cipher import *
 from greeclimateapi.commands.scanGreeCommand import scanGreeCommand
 from greeclimateapi.commands.bindGreeCommand import bindGreeCommand
 from greeclimateapi.commands.statusGreeCommand import statusGreeCommand
 from greeclimateapi.commands.greeSetCommands import *
+from greeclimateapi.enums import EncryptionType
 
 
 class greeCommandFactory:
-    def __init__(self, device_ip):
+    def __init__(self, device_ip, encryption_type : EncryptionType):
         self.connection = greeDeviceConnection(device_ip)
-        self.cipher = greeDeviceCipher()
+        self.cipher : greeDeviceCipher = greeECBDeviceCipher()
         self.mac = None
+        self.encryption_type = encryption_type
 
     def set_mac(self, mac):
         self.mac = mac
+
+    def switch_to_target_cipher(self):
+        if self.encryption_type == EncryptionType.aes_ecb:
+            return
+        self.cipher = greeGCMDeviceCipher()
 
     def set_key(self, key):
         self.cipher.set_key(key)

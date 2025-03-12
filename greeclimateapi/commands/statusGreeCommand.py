@@ -37,14 +37,13 @@ class statusGreeCommand(greeCommand):
         request = {
             "cid": "app",
             "i": 0,
-            "pack": self.cipher.encode(str(pack_request).replace("'", '"')),
             "t": "pack",
             "tcid": self.factory.mac,
             "uid": 0
         }
-        request_str = str(request).replace("'", '"')
+        request_str = self.cipher.encrypt_pack_parameter(request, pack_request)
         response = await self.connection.send_data(request_str)
-        decrypted_pack = self.cipher.decode(response["pack"])
+        decrypted_pack = self.cipher.decode_pack_parameter(response)
         self.statusData = GreeStatusData()
         self.statusData.power = bool(decrypted_pack["dat"][0])
         self.statusData.operationMode = OperationMode(decrypted_pack["dat"][1])
